@@ -1,0 +1,25 @@
+universe: [SPY, QQQ, IWM, TLT, GLD]
+benchmark: SPY
+start_date: "2010-01-01"
+end_date: null  # null = today
+
+costs:
+  spread_bps: 1.0      # half-spread is paid per side
+  slippage_bps: 5.0    # paid per side
+  commission_bps: 0.0  # ETFs
+
+strategies:
+  momentum_12_1:
+    lookback: 252  # ~12 months in trading days
+    skip: 21       # ~1 month skip (the "1" in 12-1)
+  sma_50_200:
+    fast: 50
+    slow: 200
+
+walkforward:
+  train_years: 4   # 2010-01 → 2013-12 in-sample warmup
+  test_years: 1    # roll one year at a time for OOS
+
+bootstrap:
+  n_iter: 1000
+  confidence: 0.95
